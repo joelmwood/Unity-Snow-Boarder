@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class CrashDetector : MonoBehaviour
 {
-    float reloadDelay = 1f;
+    float reloadDelay = 0.5f;
 
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.tag == "Ground"){
