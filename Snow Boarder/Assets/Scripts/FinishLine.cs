@@ -5,10 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class FinishLine : MonoBehaviour
 {
-   void OnTriggerEnter2D(Collider2D other) {
+    float reloadDelay = 1f;
+    
+    void OnTriggerEnter2D(Collider2D other) {
         if(other.tag == "Player"){
             Debug.Log("Player crossed the Finish Line");
-            SceneManager.LoadScene(0);
+            Invoke("reloadScene", reloadDelay);
         }
+    }
+
+   void reloadScene(){
+        SceneManager.LoadScene(0);
    }
 }
