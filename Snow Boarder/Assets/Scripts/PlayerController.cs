@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    bool canMove = true;
+
     Rigidbody2D rb2d;
     [SerializeField] float torqueAmount = 1f;
 
@@ -23,10 +25,19 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RotatePlayer();
-        RespondToBoost();
+        if(canMove){
+            RotatePlayer();
+            RespondToBoost();
+        }
         // QuitGame();
     }
+
+    public void DisableControls(){
+        canMove = false;
+    }
+    // public void EnableControls(){
+    //     canMove = true;
+    // }
 
     void RotatePlayer()
     {
