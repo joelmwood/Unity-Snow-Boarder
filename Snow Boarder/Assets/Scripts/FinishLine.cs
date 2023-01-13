@@ -13,6 +13,7 @@ public class FinishLine : MonoBehaviour
             finishEffect.Play();
             Debug.Log("Player crossed the Finish Line");
             Invoke("reloadScene", reloadDelay);
+            GetComponent<AudioSource>().Play();
         }
     }
 
