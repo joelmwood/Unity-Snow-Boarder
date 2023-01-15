@@ -15,7 +15,7 @@ public class CrashDetector : MonoBehaviour
             hasCrashed = true;
             FindObjectOfType<PlayerController>().DisableControls();
             crashEffect.Play();
-            Debug.Log("GROUND!!");
+            // Debug.Log("GROUND!!");
             Invoke("reloadScene", reloadDelay);
             GetComponent<AudioSource>().PlayOneShot(crashSFX);
         }

@@ -11,7 +11,7 @@ public class FinishLine : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other) {
         if(other.tag == "Player"){
             finishEffect.Play();
-            Debug.Log("Player crossed the Finish Line");
+            // Debug.Log("Player crossed the Finish Line");
             Invoke("reloadScene", reloadDelay);
             GetComponent<AudioSource>().Play();
         }

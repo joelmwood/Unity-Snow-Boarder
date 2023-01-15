@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    Vector2 moveInput;
+
     public bool canMove = true;
 
     Rigidbody2D rb2d;
@@ -25,42 +28,56 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(canMove){
-            RotatePlayer();
-            RespondToBoost();
-        }
+        RotatePlayer();
         // QuitGame();
     }
 
-    public void DisableControls(){
-        canMove = false;
-    }
-    // public void EnableControls(){
-    //     canMove = true;
-    // }
-
     void RotatePlayer()
     {
-        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+        if (moveInput.x == -1)
         {
-            rb2d.AddTorque(torqueAmount);
+            rb2d.AddTorque(torqueAmount, ForceMode2D.Impulse);
         }
-        else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+        else if (moveInput.x == 1)
         {
-            rb2d.AddTorque(-(torqueAmount));
+            rb2d.AddTorque(-(torqueAmount), ForceMode2D.Impulse);
         }
     }
-    void RespondToBoost(){
-        if(Input.GetKey(KeyCode.Space )){
+
+    void OnMove(InputValue value)
+    {
+        moveInput = value.Get<Vector2>();
+    }
+
+    void OnBoost(InputValue value)
+    {
+        if (canMove)
+        {
             // Debug.Log("You pressed the boost button!");
             surfaceEffector2D.speed = boostSpeed;
             Invoke("ResetSpeed", baseSpeedResetDelay);
         }
     }
 
-    void ResetSpeed(){
+    public void DisableControls()
+    {
+        canMove = false;
+    }
+    // public void EnableControls(){
+    //     canMove = true;
+    // }
+
+
+    void RespondToBoost()
+    {
+
+    }
+
+    void ResetSpeed()
+    {
         surfaceEffector2D.speed = baseSpeed;
     }
+
 
     // void QuitGame(){
     //     if(Input.GetKey(KeyCode.Escape)){
